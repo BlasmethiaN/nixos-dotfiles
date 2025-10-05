@@ -1,0 +1,79 @@
+// -*- mode: jsonc -*-
+{
+    "layer": "top", 
+    "position": "top", 
+    "height": 30, 
+    "spacing": 4, 
+
+    "modules-left": [
+        "hyprland/workspaces",
+        "custom/sep"
+    ],
+    "modules-center": [
+    ],
+    "modules-right": [
+        "custom/sep",
+        "custom/keyboard-layout",
+        "custom/sep",
+        "pulseaudio",
+        "custom/sep",
+        "clock",
+        "custom/sep",
+        "battery",
+        "custom/sep",
+        "tray"
+    ],
+
+    // Modules configuration
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "warp-on-scroll": false,
+            "format": "{icon}",
+            "format-icons": {
+                "default": "○",
+                "active": "●"
+            },
+        "persistent-workspaces": {
+            "*" : 9
+        }
+    },
+    "tray": {
+        "spacing": 10
+    },
+    "clock": {
+        "format": " {:%a %d.%m. %H:%M}"
+    },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon}  {capacity}%",
+        "format-plugged": "{capacity}% ",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "network": {
+        "format": "Online",
+        "format-disconnected": "Disconnected ⚠"
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": " Muted",
+        "format-icons": {
+            "default": ["", "", ""]
+        },
+        "scroll-step": 5
+    },
+    "custom/keyboard-layout": {
+	"exec": "/home/blasmesian/.local/bin/keyboard_layout.sh",
+        "format": "{}",
+	"interval": 1,
+	"tooltip": false
+    },
+    "custom/sep": {
+        "format" : "|",
+        "interval" : 0
+    }
+}

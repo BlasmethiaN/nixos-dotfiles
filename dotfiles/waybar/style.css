@@ -1,0 +1,154 @@
+@define-color rosewater   #f4dbd6;
+@define-color flamingo    #f0c6c6;
+@define-color pink        #f5bde6;
+@define-color mauve       #c6a0f6;
+@define-color red         #ed8796;
+@define-color maroon      #ee99a0;
+@define-color peach       #f5a97f;
+@define-color yellow      #eed49f;
+@define-color green       #a6da95;
+@define-color teal        #8bd5ca;
+@define-color sky         #91d7e3;
+@define-color sapphire    #7dc4e4;
+@define-color blue        #8aadf4;
+@define-color lavender    #b7bdf8;
+
+@define-color text        #cad3f5;
+@define-color subtext1    #b8c0e0;
+@define-color subtext0    #a5adcb;
+@define-color overlay2    #939ab7;
+@define-color overlay1    #8087a2;
+@define-color overlay0    #6e738d;
+@define-color surface2    #5b6078;
+@define-color surface1    #494d64;
+@define-color surface0    #363a4f;
+@define-color base        #24273a;
+@define-color mantle      #1e2030;
+@define-color crust       #181926;
+
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+}
+
+window#waybar {
+    background-color: @mantle;
+    color: @text;
+    border: none;
+}
+
+#workspaces {
+    background: transparent;
+    margin: 0 6px;
+    padding: 0;
+}
+
+#workspaces button {
+    all: unset;
+    font-size: 16px;
+    color: @overlay1;
+    padding: 4px;
+    margin: 0 3px;
+    border-radius: 999px;
+    background-color: transparent;
+    min-width: 24px;
+    min-height: 24px;
+}
+
+#workspaces button.empty {
+    color: @surface2;
+}
+
+#workspaces button:not(.active):not(.empty) {
+    color: @peach;
+}
+
+#workspaces button.active {
+    background-color: @peach;
+    color: @base;
+}
+
+#workspaces button.active.empty {
+    background-color: @surface0;
+    color: @overlay2;
+}
+
+#workspaces button.urgent {
+    background-color: @red;
+    color: @base;
+}
+
+#workspaces button:hover {
+    background-color: @overlay0;
+    color: @text;
+}
+
+#custom-sep {
+    color: @sep;
+    padding: 0 6px;
+    margin: 0;
+}
+
+#clock,
+#battery,
+#network,
+#pulseaudio,
+#custom-keyboard-layout,
+#tray {
+    background-color: @crust;
+    color: @text;
+    padding: 2px 10px;
+    margin: 0 4px;
+    border-radius: 6px;
+}
+
+/* Specific color accents (optional) */
+#clock {
+    color: @blue;
+}
+
+#pulseaudio {
+    color: @pink;
+}
+
+#pulseaudio.muted {
+    color: @subtext0;
+}
+
+#battery {
+    color: @mauve;
+}
+
+#battery.charging {
+    color: @green;
+}
+
+#network {
+    color: @teal;
+}
+
+#network.disconnected {
+    background-color: @red;
+    color: @base;
+}
+
+#custom-keyboard-layout {
+    color: @yellow;
+}
+
+#tray {
+    background-color: @crust;
+}
+
+tooltip {
+    background: @mantle;
+    color: @text;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
