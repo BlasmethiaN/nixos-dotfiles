@@ -17,6 +17,10 @@
 '';
     };
 
+    programs.starship = {
+      enable = true;
+    };
+
     programs.ranger = {
       enable = true;
       extraConfig = ''
@@ -28,9 +32,11 @@
       '';
     };
 
+
     home.file = with pkgs; {
       ".config/alacritty/alacritty.toml".source = ../dotfiles/alacritty/alacritty.toml;
       ".config/hypr".source = ../dotfiles/hypr;
+      ".config/starship.toml".source = ../dotfiles/starship.toml;
       ".config/waybar".source = ../dotfiles/waybar;
       ".local/bin/keyboard_layout.sh" = {
 	source = ../dotfiles/scripts/keyboard_layout.sh;
@@ -75,6 +81,6 @@
       pkg-config
       curl
       lua-language-server
-      
+      jetbrains-mono
     ];
   }

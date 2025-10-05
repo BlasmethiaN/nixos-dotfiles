@@ -1,6 +1,7 @@
-# Font
 [font]
-size = 14
+normal.family = "JetBrains Mono"
+normal.style = "Regular"
+size = 14.0
 
 [colors.primary]
 background = "#24273a"
