@@ -42,6 +42,11 @@
 	source = ../dotfiles/scripts/keyboard_layout.sh;
         executable = true;
       };
+      ".local/bin/launch-wofi.sh" = {
+	source = ../dotfiles/scripts/launch-wofi.sh;
+        executable = true;
+      };
+
     };
 
     home.packages = with pkgs; [
