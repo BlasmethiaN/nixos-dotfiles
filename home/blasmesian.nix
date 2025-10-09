@@ -14,6 +14,9 @@
       };
       initExtra = ''
   export PATH=$HOME/.local/bin:$PATH
+  if command -v fastfetch &>/dev/null; then
+      fastfetch
+  fi
 '';
     };
 
@@ -87,5 +90,8 @@
       lua-language-server
       jetbrains-mono
       jq
+      bibata-cursors
+      neofetch
+      fastfetch
     ];
   }

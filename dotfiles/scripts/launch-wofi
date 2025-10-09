@@ -29,7 +29,7 @@ case "$MODE" in
           --show dmenu \
           --prompt "Switch to window:" \
       | awk -F'\t' '{print $2}' \
-      | xargs -r hyprctl dispatch focuswindow address:
+      | xargs -r -I{} hyprctl dispatch focuswindow address:{}
     ;;
   
   *)
