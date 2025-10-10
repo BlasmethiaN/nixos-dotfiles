@@ -53,6 +53,7 @@
 
     home.packages = with pkgs; [
       waybar
+      hyprpanel
       bat
       rofi
       gcc
@@ -83,6 +84,8 @@
       gzip
       yazi
       blueman
+      bluez
+      dbus
       killall
       ninja
       pkg-config

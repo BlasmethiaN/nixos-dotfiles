@@ -24,6 +24,8 @@
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
   security.polkit.enable = true;
 
+  hardware.bluetooth.enable = true;
+
   # Set your time zone.
   time.timeZone = "Europe/Prague";
 
