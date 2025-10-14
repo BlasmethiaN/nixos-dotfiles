@@ -41,6 +41,7 @@
       ".config/hypr".source = ../dotfiles/hypr;
       ".config/starship.toml".source = ../dotfiles/starship.toml;
       ".config/waybar".source = ../dotfiles/waybar;
+      ".config/hyprpanel".source = ../dotfiles/hyprpanel;
       ".local/bin/keyboard_layout.sh" = {
 	source = ../dotfiles/scripts/keyboard_layout.sh;
         executable = true;

@@ -1,0 +1,34 @@
+{
+  "theme": "catppuccin-macchiato",
+  "bar.workspaces.hideUnoccupied": false,
+  "bar.workspaces.showAllActive": true,
+  "bar.layouts": {
+    "*": {
+      "left": [
+        "workspaces",
+        "media"
+      ],
+      "middle": [],
+      "right": [
+        "volume",
+        "network",
+        "clock",
+        "battery"
+      ]
+    }
+  },
+  "bar.customModules.storage.paths": [
+    "/"
+  ],
+  "theme.font.name": "JetBrains Mono",
+  "theme.font.weight": 600,
+  "theme.font.size": "1.1rem",
+  "theme.bar.floating": true,
+  "theme.bar.transparent": true,
+  "theme.bar.opacity": 100,
+  "theme.bar.layer": "top",
+  "theme.bar.location": "top",
+  "theme.bar.margin_sides": "0.5em",
+  "theme.bar.margin_bottom": "0em",
+  "theme.bar.buttons.enableBorders": true
+}
