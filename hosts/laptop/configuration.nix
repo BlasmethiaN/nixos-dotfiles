@@ -49,6 +49,7 @@
   };
 
   services.xserver.enable = true;
+  services.upower.enable = true;
   services.displayManager.gdm.enable = true;
   # Enable the X11 windowing system.
   # services.xserver = {

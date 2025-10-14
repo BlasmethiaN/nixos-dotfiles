@@ -95,6 +95,7 @@
       jq
       bibata-cursors
       neofetch
+      upower
       fastfetch
     ];
   }
