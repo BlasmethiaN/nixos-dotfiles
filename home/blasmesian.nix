@@ -15,7 +15,7 @@
       initExtra = ''
   export PATH=$HOME/.local/bin:$PATH
   if command -v fastfetch &>/dev/null; then
-      fastfetch
+      fastfetch --config ~/.config/fastfetch/main.jsonc
   fi
 '';
     };
@@ -41,6 +41,7 @@
       ".config/starship.toml".source = ../dotfiles/starship.toml;
       ".config/waybar".source = ../dotfiles/waybar;
       ".config/hyprpanel".source = ../dotfiles/hyprpanel;
+      ".config/fastfetch".source = ../dotfiles/fastfetch;
       ".local/bin/keyboard_layout.sh" = {
 	source = ../dotfiles/scripts/keyboard_layout.sh;
         executable = true;
