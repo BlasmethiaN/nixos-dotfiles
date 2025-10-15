@@ -35,7 +35,6 @@
       '';
     };
 
-
     home.file = with pkgs; {
       ".config/alacritty/alacritty.toml".source = ../dotfiles/alacritty/alacritty.toml;
       ".config/hypr".source = ../dotfiles/hypr;
@@ -55,6 +54,7 @@
     home.packages = with pkgs; [
       waybar
       hyprpanel
+      swww
       bat
       rofi
       gcc
