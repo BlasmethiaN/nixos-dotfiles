@@ -2,8 +2,10 @@
 
 if ! pgrep -x swww-daemon > /dev/null; then
   swww-daemon &
-  sleep 1
 fi
 
-swww img "/home/blasmesian/.config/hypr/wallpapers/darling.png"
+swww img "/home/blasmesian/.config/hypr/wallpapers/darkroom_hair_fixed.png"
 
+for ws in {9..1}; do
+    hyprctl dispatch workspace "$ws"
+done

@@ -99,5 +99,6 @@
       neofetch
       upower
       fastfetch
+      gedit
     ];
   }
