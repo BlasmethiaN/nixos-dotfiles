@@ -10,6 +10,7 @@
       ],
       "middle": [],
       "right": [
+        "bluetooth",
         "volume",
         "network",
         "clock",
@@ -30,5 +31,6 @@
   "theme.bar.location": "top",
   "theme.bar.margin_sides": "0.5em",
   "theme.bar.margin_bottom": "0em",
-  "theme.bar.buttons.enableBorders": true
+  "theme.bar.buttons.enableBorders": true,
+  "bar.clock.format": "%a, %d %b %H:%M"
 }
