@@ -24,6 +24,8 @@
       enable = true;
     };
 
+    programs.kitty.enable = true;
+
     programs.ranger = {
       enable = true;
       extraConfig = ''
@@ -37,6 +39,7 @@
 
     home.file = with pkgs; {
       ".config/alacritty/alacritty.toml".source = ../dotfiles/alacritty/alacritty.toml;
+      ".config/kitty".source = ../dotfiles/kitty;
       ".config/hypr".source = ../dotfiles/hypr;
       ".config/starship.toml".source = ../dotfiles/starship.toml;
       ".config/waybar".source = ../dotfiles/waybar;
@@ -68,6 +71,7 @@
       htop
       btop
       alacritty
+      kitty
       wget
       unzip
       atool
