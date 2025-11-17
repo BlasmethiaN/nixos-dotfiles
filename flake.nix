@@ -27,6 +27,11 @@
           specialArgs = { inherit inputs outputs; };
           modules = [ ./hosts/laptop/configuration.nix ];
         };
+
+        pc = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./hosts/pc/configuration.nix ];
+        };
       };
     };
 }
