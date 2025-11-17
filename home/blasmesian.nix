@@ -9,7 +9,7 @@
     programs.bash = {
       enable = true;
       shellAliases = {
-	nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles/#laptop";
+	nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles/#pc";
 	vim = "nvim";
       };
       initExtra = ''
