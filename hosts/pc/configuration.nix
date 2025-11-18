@@ -29,6 +29,10 @@
   hardware.graphics.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.open = true;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.production;
+  hardware.nvidia.modesetting.enable = true;
+  hardware.nvidia.powerManagement.enable = true;
+  hardware.opengl.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Prague";
@@ -54,16 +58,7 @@
 
   services.xserver = {
   enable = true;
-  libinput = {
-    enable = true;
-    mouse = {
-      accelProfile = "flat";
-    };
-    touchpad = {
-      accelProfile = "flat";
-    };
   };
-};
   services.upower.enable = true;
   services.displayManager.gdm.enable = true;
   # Enable the X11 windowing system.
@@ -95,6 +90,11 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
+  environment.sessionVariables = {
+    XCURSOR_THEME = "Bibata-Original-Classic";
+    XCURSOR_SIZE = "24";
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.blasmesian = {
     isNormalUser = true;
@@ -105,6 +105,8 @@
   };
 
   programs.firefox.enable = true;
+
+  programs.steam.enable = true;
 
   nixpkgs.config.allowUnfree = true;
 

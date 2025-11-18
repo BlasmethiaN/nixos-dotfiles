@@ -10,11 +10,9 @@
       ],
       "middle": [],
       "right": [
-        "bluetooth",
         "volume",
         "network",
-        "clock",
-        "battery"
+        "clock"
       ]
     }
   },

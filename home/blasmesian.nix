@@ -56,8 +56,10 @@
     };
 
     home.packages = with pkgs; [
+      xsettingsd
       discord
       steam
+      vulkan-loader
       wlr-randr
       waybar
       hyprpanel
