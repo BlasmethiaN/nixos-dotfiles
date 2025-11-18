@@ -56,6 +56,9 @@
     };
 
     home.packages = with pkgs; [
+      discord
+      steam
+      wlr-randr
       waybar
       hyprpanel
       swww

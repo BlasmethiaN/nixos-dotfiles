@@ -24,7 +24,11 @@
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
   security.polkit.enable = true;
 
-  hardware.bluetooth.enable = true;
+  hardware.bluetooth.enable = false;
+
+  hardware.graphics.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia.open = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Prague";
@@ -48,7 +52,18 @@
     LC_TIME = "cs_CZ.UTF-8";
   };
 
-  services.xserver.enable = true;
+  services.xserver = {
+  enable = true;
+  libinput = {
+    enable = true;
+    mouse = {
+      accelProfile = "flat";
+    };
+    touchpad = {
+      accelProfile = "flat";
+    };
+  };
+};
   services.upower.enable = true;
   services.displayManager.gdm.enable = true;
   # Enable the X11 windowing system.
@@ -90,6 +105,8 @@
   };
 
   programs.firefox.enable = true;
+
+  nixpkgs.config.allowUnfree = true;
 
   programs.hyprland = {
     enable = true;

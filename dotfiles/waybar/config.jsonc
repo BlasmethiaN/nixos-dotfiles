@@ -27,7 +27,7 @@
     // Modules configuration
     "hyprland/workspaces": {
         "disable-scroll": true,
-        "all-outputs": true,
+        "all-outputs": false,
         "warp-on-scroll": false,
             "format": "{icon}",
             "format-icons": {
@@ -35,7 +35,8 @@
                 "active": "●"
             },
         "persistent-workspaces": {
-            "*" : 9
+		"DP-1": [1, 2, 3, 4, 5], 
+		"HDMI-A-1": [6, 7, 8, 9]
         }
     },
     "tray": {
