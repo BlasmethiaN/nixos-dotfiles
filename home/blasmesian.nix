@@ -104,5 +104,6 @@
       upower
       fastfetch
       gedit
+      discord
     ];
   }
