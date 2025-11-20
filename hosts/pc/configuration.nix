@@ -27,12 +27,12 @@
   hardware.bluetooth.enable = false;
 
   hardware.graphics.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.open = true;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.production;
   hardware.nvidia.modesetting.enable = true;
   hardware.nvidia.powerManagement.enable = true;
   hardware.opengl.enable = true;
+
 
   # Set your time zone.
   time.timeZone = "Europe/Prague";
@@ -58,6 +58,7 @@
 
   services.xserver = {
   enable = true;
+  videoDrivers = [ "nvidia" ];
   };
   services.upower.enable = true;
   services.displayManager.gdm.enable = true;
@@ -90,11 +91,6 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
-  environment.sessionVariables = {
-    XCURSOR_THEME = "Bibata-Original-Classic";
-    XCURSOR_SIZE = "24";
-  };
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.blasmesian = {
     isNormalUser = true;
@@ -115,11 +111,6 @@
     xwayland.enable = true;
   };
 
-  fonts.packages = [
-    pkgs.nerd-fonts.caskaydia-mono
-    pkgs.nerd-fonts.iosevka
-    pkgs.nerd-fonts.blex-mono
-  ];
 
   home-manager = {
     extraSpecialArgs = { inherit pkgs inputs outputs; };
@@ -127,15 +118,6 @@
       blasmesian = import ../../home/blasmesian.nix;
     };
   };
-
-  environment.sessionVariables = {
-    EDITOR = "nvim";
-    VISUAL = "nvim";
-    Path = "/home/blasmesian/.local/bin:" + builtins.getEnv "PATH";
-    XDG_STATE_HOME = "/home/blasmesian/.local/state";
-    XDG_DATA_HOME = "/home/blasmesian/.local/share";
-  };
-
 
 #  # List packages installed in system profile.
 #  # You can use https://search.nixos.org/ to find more packages (and options).

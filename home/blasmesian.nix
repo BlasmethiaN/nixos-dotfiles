@@ -1,9 +1,19 @@
-  { config, pkgs, ... }:
+  { config, pkgs, inputs, ... }:
 
   {
     home.username = "blasmesian";
     home.homeDirectory = "/home/blasmesian";
     home.stateVersion = "24.11";
+
+    home.sessionVariables = {
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+      Path = "/home/blasmesian/.local/bin:" + builtins.getEnv "PATH";
+      XDG_STATE_HOME = "/home/blasmesian/.local/state";
+      XDG_DATA_HOME = "/home/blasmesian/.local/share";
+      XCURSOR_THEME = "Bibata-Original-Classic";
+      XCURSOR_SIZE = "24";
+    };
 
 
     programs.bash = {
@@ -55,9 +65,22 @@
       };
     };
 
+    fonts.fontconfig.enable = true;
+
     home.packages = with pkgs; [
+      nerd-fonts.caskaydia-mono
+      nerd-fonts.iosevka
+      nerd-fonts.blex-mono
+      fira-code
+      fira-code-symbols
+      font-awesome
+      liberation_ttf
+      proggyfonts
+      noto-fonts-color-emoji
+      noto-fonts-cjk-sans
       xsettingsd
       discord
+      spotify
       steam
       vulkan-loader
       wlr-randr
@@ -110,4 +133,5 @@
       fastfetch
       gedit
     ];
+
   }
