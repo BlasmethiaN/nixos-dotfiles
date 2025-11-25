@@ -21,6 +21,7 @@
       shellAliases = {
 	nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles/#pc";
 	vim = "nvim";
+        ls = "eza -la --header --git --icons --group-directories-first";
       };
       initExtra = ''
   export PATH=$HOME/.local/bin:$PATH
@@ -63,11 +64,22 @@
 	source = ../dotfiles/scripts/launch-wofi;
         executable = true;
       };
+      ".local/bin/screenshot" = {
+	source = ../dotfiles/scripts/screenshot.sh;
+        executable = true;
+      };
     };
 
     fonts.fontconfig.enable = true;
 
     home.packages = with pkgs; [
+      wev
+      grim
+      slurp
+      wl-clipboard
+      libnotify
+      gzip
+      eza
       nerd-fonts.caskaydia-mono
       nerd-fonts.iosevka
       nerd-fonts.blex-mono
