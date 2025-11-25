@@ -64,6 +64,10 @@
 	source = ../dotfiles/scripts/launch-wofi;
         executable = true;
       };
+      ".local/bin/launch-wofi-emoji" = {
+	source = ../dotfiles/scripts/launch-wofi-emoji;
+        executable = true;
+      };
       ".local/bin/screenshot" = {
 	source = ../dotfiles/scripts/screenshot.sh;
         executable = true;
