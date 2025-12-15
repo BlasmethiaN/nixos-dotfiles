@@ -25,9 +25,13 @@
       };
       initExtra = ''
   export PATH=$HOME/.local/bin:$PATH
+  export EDITOR="nvim"
+  export VISUAL="nvim"
   if command -v fastfetch &>/dev/null; then
       fastfetch --config ~/.config/fastfetch/main.jsonc
   fi
+
+  rm -f $HOME/.local/share/recently-used.xbel
 '';
     };
 
@@ -77,6 +81,10 @@
     fonts.fontconfig.enable = true;
 
     home.packages = with pkgs; [
+      mpv
+      zathura
+      lutris
+      libreoffice
       wev
       grim
       slurp
