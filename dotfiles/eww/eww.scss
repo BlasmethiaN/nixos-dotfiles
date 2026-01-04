@@ -28,14 +28,14 @@ $font: "JetBrains Mono Nerd Font";
   margin: 5px;
   color: #FFFF66;
   
-  min-height: 28px; 
+  min-height: 30px; 
   padding: 0 12px;
 
   box-shadow: 0 0 4px rgba(100, 149, 237, 0.8);
 }
 
 .volume-eventbox, .media-eventbox {
-  padding: 5px;
+  padding: 0px;
 }
 
 .icon {
@@ -46,8 +46,9 @@ $font: "JetBrains Mono Nerd Font";
 
 
 .workspaces {
-  padding: 5px;
+  padding: 0 4px;
 
+  min-height: 30px;
   button {
     all: unset;
     
