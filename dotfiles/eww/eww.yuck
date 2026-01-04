@@ -1,5 +1,7 @@
 (defvar eww "eww")
 
+(defvar vol_reveal false)
+
 (defpoll time :interval "10s"
   "date '+%a, %d %b %H:%M'")
 
@@ -34,17 +36,17 @@
                 :class "dot ${ws.occupied ? 'occupied' : ''} ${ws.active ? 'active' : ''}")))))
 
 (defwidget volume_widget []
-  (eventbox :onscroll "echo {} | sed -e 's/up/--increase 5/g' -e 's/down/--decrease 5/g' | xargs pamixer"
+  (eventbox :onscroll "scripts/vol_osd.sh {} &"
             :class "volume-eventbox"
-            :class "media-eventbox"
     (box :class "module" 
          :space-evenly false
          (label :class "icon" :text " ")
          (label :text "${volume}%"))))
 
-(defwidget music []
+(defwidget music [monitor_id]
   (eventbox :onscroll "echo {} | sed -e 's/up/next/g' -e 's/down/previous/g' | xargs playerctl"
-            :onclick "playerctl play-pause"
+            :onclick "eww open --toggle media_hud_mon${monitor_id} && eww open --toggle media_hud_closer_mon${monitor_id}"
+            :onrightclick "playerctl play-pause"
     (box :class "module media"
          :orientation "h"
          :space-evenly false
@@ -52,22 +54,113 @@
          (label :class "icon" :text "󰝚 ")
          (label :text media :limit-width 35))))
 
+;; --- MEDIA HUD WINDOWS & WIDGET ---
+
+(defwidget media_hud_content []
+  (box :class "hud-card" :orientation "v" :space-evenly false
+    (box :space-evenly true :class "hud-header"
+      (label :text "󰓠 SIGNAL_STRENGTH: NOMINAL" :class "hud-status" :halign "start")
+      (label :text "ID: 77-HL1NK0" :class "hud-status" :halign "end"))
+    
+    (box :class "hud-separator")
+
+    (box :orientation "v" :space-evenly false :class "hud-body" :style "margin: 10px 0;"
+      (label :text "NOW_PLAYING" :class "hud-label-tiny" :halign "start")
+      (label :text {media != "" ? media : "NO_DATA_STREAM"} 
+             :class "hud-title" 
+             :limit-width 25
+             :halign "start")
+      (label :text "CONNECTION_STABLE" :class "hud-status" :style "font-size: 8px; opacity: 0.4;" :halign "start"))
+
+    (box :class "hud-controls" :halign "center" :spacing 20
+      (button :onclick "playerctl previous" :class "hud-btn" "󰒮")
+      (button :onclick "playerctl play-pause" :class "hud-btn-play" "󰐊")
+      (button :onclick "playerctl next" :class "hud-btn" "󰒭"))
+      
+    (box :class "hud-separator")
+
+    (box :space-evenly false
+      (label :text "SECURE_CONNECTION_V2.1" :class "hud-status" :style "font-size: 8px; opacity: 0.5;")
+      (label :text " // " :style "color: #6495ED; opacity: 0.5;")
+      (label :text "0x6495ED" :class "hud-status" :style "font-size: 8px; opacity: 0.5;"))
+  ))
+
+(defwindow media_hud_mon1
+  :monitor 0
+  :geometry (geometry :x "170px" :y "5px" :width "350px" :height "150px" :anchor "top left")
+  :stacking "overlay"
+  (media_hud_content))
+
+(defwindow media_hud_mon2
+  :monitor 1
+  :geometry (geometry :x "298px" :y "5px" :width "350px" :height "150px" :anchor "top left")
+  :stacking "overlay"
+  (media_hud_content))
+
+;; --- CLOSER WINDOWS (Pro zavření kliknutím mimo) ---
+
+(defwindow media_hud_closer_mon1
+  :monitor 0
+  :geometry (geometry :x "0px" :y "0px" :width "100%" :height "100%")
+  :stacking "fg"
+  :focusable false
+  (eventbox :onclick "eww close media_hud_mon1 media_hud_closer_mon1"))
+
+(defwindow media_hud_closer_mon2
+  :monitor 1
+  :geometry (geometry :x "0px" :y "0px" :width "100%" :height "100%")
+  :stacking "fg"
+  :focusable false
+  (eventbox :onclick "eww close media_hud_mon2 media_hud_closer_mon2"))
+
+(defwidget volume_hud_content []
+  (box :class "vol-hud-card" :orientation "v" :space-evenly false
+    (label :text "SEC_04" :halign "start" :style "font-size: 6px; color: #6495ED; margin-left: 2px; opacity: 0.5;")
+    (label :text "SYSTEM_VOL" :class "vol-hud-label")
+    
+    (box :class "vol-bar-container" 
+         :height 210 
+         :width 20
+         :orientation "v" 
+         :space-evenly false
+      
+      (box :vexpand true)
+      
+      (box :class "vol-bar-fill" 
+           :height {volume * 2} 
+           :width 14
+           :halign "center"
+           :orientation "v"
+           :space-evenly false
+        (box :class "vol-indicator-line"))
+    )
+    
+    (label :text "${volume}%" :class "vol-hud-value")
+    (label :text "LINK_STABLE" :class "vol-hud-subtext")
+  ))
+
+(defwindow vol_hud_mon1
+  :monitor 1
+  :geometry (geometry :x "30px" :y "0px" :width "70px" :height "400px" :anchor "center right")
+  :stacking "overlay"
+  (revealer :transition "crossfade" :reveal vol_reveal :duration "300ms"
+    (box :class "vol-hud-container"
+      (volume_hud_content))))
+
 (defwidget right_modules []
   (box :orientation "h"
        :space-evenly false
        :halign "end"
        :spacing 10
-       
        (volume_widget)
-
        (network_widget)
-
        (box :class "module clock"
             :space-evenly false
             (label :class "icon" :text " ")
             (label :text time))))
 
-;; --- BAR ---
+;; --- BARS ---
+
 (defwindow bar_mon1
   :monitor 0
   :windowtype "dock"
@@ -78,7 +171,7 @@
                :class "bar-inner"
       (box :halign "start" :space-evenly false :spacing 10 :valign "center"
            (workspace_list :workspace_data workspaces_mon1)
-           (music))
+           (music :monitor_id 1))
       (box)
       (box :halign "end" :space-evenly false :spacing 10 :valign "center"
            (right_modules)))))
@@ -86,12 +179,13 @@
 (defwindow bar_mon2
   :monitor 1
   :windowtype "dock"
-  :geometry (geometry :x "0%" :y "10px" :width "98%" :height "40px" :anchor "top center")
+  :geometry (geometry :x "0%" :y "10px" :width "98%" :height "52px" :anchor "top center")
   :exclusive true
   (box :class "main-container"
     (centerbox :orientation "h"
-      (box :halign "start" :space-evenly false :spacing 10
-           (workspace_list :workspace_data workspaces_mon2) ;; Správné předání dat
-           (music))
+      (box :halign "start" :space-evenly false :spacing 10 :valign "center"
+           (workspace_list :workspace_data workspaces_mon2)
+           (music :monitor_id 2))
       (box)
-      (right_modules))))
+      (box :halign "end" :space-evenly false :spacing 10 :valign "center"
+           (right_modules)))))
