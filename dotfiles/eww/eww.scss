@@ -1,0 +1,78 @@
+$bg: #010203;
+$border: #6495ED;
+$text: #FFFF66;
+$active: #FFFF66;
+$inactive: #6495ED;
+$font: "JetBrains Mono Nerd Font";
+
+* {
+  all: unset;
+  font-family: 'JetBrains Mono';
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.main-container {
+  background-color: transparent;
+  padding: 4px 0;
+}
+
+.bar {
+  background-color: transparent;
+}
+
+.module {
+  background-color: #010203;
+  border: 2px solid #6495ED;
+  border-radius: 5px;
+  margin: 5px;
+  color: #FFFF66;
+  
+  min-height: 28px; 
+  padding: 0 12px;
+
+  box-shadow: 0 0 4px rgba(100, 149, 237, 0.8);
+}
+
+.volume-eventbox, .media-eventbox {
+  padding: 5px;
+}
+
+.icon {
+  color: $border;
+  margin-right: 8px;
+  font-size: 1.2rem;
+}
+
+
+.workspaces {
+  padding: 5px;
+
+  button {
+    all: unset;
+    
+    &:hover .dot {
+      background-color: #F7635D;
+    }
+  }
+
+  .dot {
+    background-color: #6495ED; 
+    min-width: 14px;
+    min-height: 14px;
+    border-radius: 50%;
+    margin: 0 5px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .occupied {
+    background-color: #FFFF66;
+  }
+
+  .active {
+    background-color: #FFFF66;
+    min-width: 32px;
+    min-height: 14px;
+    border-radius: 7px;
+  }
+}

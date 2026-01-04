@@ -59,6 +59,7 @@
       ".config/starship.toml".source = ../dotfiles/starship.toml;
       ".config/waybar".source = ../dotfiles/waybar;
       ".config/hyprpanel".source = ../dotfiles/hyprpanel;
+      ".config/eww".source = ../dotfiles/eww;
       ".config/fastfetch".source = ../dotfiles/fastfetch;
       ".local/bin/keyboard_layout.sh" = {
 	source = ../dotfiles/scripts/keyboard_layout.sh;
@@ -81,6 +82,13 @@
     fonts.fontconfig.enable = true;
 
     home.packages = with pkgs; [
+      playerctl
+      pulseaudio
+      pamixer
+      jq
+      socat
+      eww
+      gimp
       mpv
       zathura
       lutris

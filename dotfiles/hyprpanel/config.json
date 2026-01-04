@@ -5,7 +5,8 @@
     "*": {
       "left": [
         "workspaces",
-        "media"
+        "media",
+        "cava"
       ],
       "middle": [],
       "right": [
@@ -31,10 +32,12 @@
   "theme.bar.buttons.enableBorders": true,
   "bar.clock.format": "%a, %d %b %H:%M",
 
-    "theme.bar.menus.background": "#010203",
+  "theme.bar.menus.background": "#010203",
   "theme.bar.background": "#010203",
   "theme.bar.buttons.media.icon": "#6495ED",
+  "theme.bar.buttons.modules.cava.icon": "#6495ED",
   "theme.bar.buttons.media.text": "#FFFF66",
+  "theme.bar.buttons.modules.cava.text": "#FFFF66",
   "theme.bar.buttons.icon": "#6495ED",
   "theme.bar.buttons.text": "#FFFF66",
   "theme.bar.buttons.hover": "#52FFF8",
@@ -42,6 +45,7 @@
   "theme.bar.menus.text": "#FFFFFF",
   "theme.bar.menus.border.color": "#6495ED",
   "theme.bar.buttons.media.background": "#010203",
+  "theme.bar.buttons.modules.cava.background": "#010203",
   "theme.bar.menus.menu.volume.text": "#FFFFFF",
   "theme.bar.menus.menu.volume.card.color": "#2A2A2B",
   "theme.bar.menus.menu.volume.label.color": "#FFFF66",
@@ -254,9 +258,9 @@
   "theme.bar.buttons.windowtitle.text": "#FFFF66",
   "theme.bar.buttons.windowtitle.background": "#010203",
   "theme.bar.buttons.workspaces.active": "#FFFF66",
-  "theme.bar.buttons.workspaces.occupied": "#52FFF8",
+  "theme.bar.buttons.workspaces.occupied": "#FFFF66",
   "theme.bar.buttons.workspaces.available": "#6495ED",
-  "theme.bar.buttons.workspaces.hover": "#52FFF8",
+  "theme.bar.buttons.workspaces.hover": "#F7635D",
   "theme.bar.buttons.workspaces.background": "#010203",
   "theme.bar.buttons.dashboard.icon": "#FFCB37",
   "theme.bar.buttons.dashboard.background": "#010203",
@@ -366,6 +370,7 @@
   "theme.bar.buttons.network.border": "#6495ED",
   "theme.bar.buttons.volume.border": "#6495ED",
   "theme.bar.buttons.media.border": "#6495ED",
+  "theme.bar.buttons.modules.cava.border": "#6495ED",
   "theme.bar.buttons.windowtitle.border": "#6495ED",
   "theme.bar.buttons.workspaces.border": "#6495ED",
   "theme.bar.buttons.dashboard.border": "#6495ED",
