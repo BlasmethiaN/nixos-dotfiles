@@ -57,8 +57,6 @@
       ".config/kitty".source = ../dotfiles/kitty;
       ".config/hypr".source = ../dotfiles/hypr;
       ".config/starship.toml".source = ../dotfiles/starship.toml;
-      ".config/waybar".source = ../dotfiles/waybar;
-      ".config/hyprpanel".source = ../dotfiles/hyprpanel;
       ".config/eww".source = ../dotfiles/eww;
       ".config/fastfetch".source = ../dotfiles/fastfetch;
       ".local/bin/keyboard_layout.sh" = {
@@ -82,6 +80,11 @@
     fonts.fontconfig.enable = true;
 
     home.packages = with pkgs; [
+      (python3.withPackages (ps: with ps; [
+        dbus-python
+        pygobject3
+      ]))
+      gobject-introspection
       playerctl
       pulseaudio
       pamixer
@@ -144,7 +147,6 @@
       stylua
       dragon-drop
       nodejs
-      python3
       ueberzugpp
       gnutar
       gzip

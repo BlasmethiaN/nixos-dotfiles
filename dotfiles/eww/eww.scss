@@ -4,77 +4,88 @@ $text: #FFFF66;
 $active: #FFFF66;
 $inactive: #6495ED;
 $font: "JetBrains Mono Nerd Font";
+$blue: #6495ED;
+$yellow: #FFFF66;
+$yellow-soft: #FFCB37;
+$cyan: #52FFF8;
+$red: #F7635D;
+$green: #3DD553;
 
 * {
   all: unset;
   font-family: 'JetBrains Mono';
-  font-weight: 600;
-  font-size: 16px;
+  font-weight: 700;
+  font-size: 15px;
 }
 
 .main-container {
   background-color: transparent;
-  padding: 4px 0;
-}
-
-.bar {
-  background-color: transparent;
+  padding: 5px 0;
 }
 
 .module {
-  background-color: #010203;
-  border: 2px solid #6495ED;
-  border-radius: 5px;
-  margin: 5px;
+  background-color: rgba(2, 4, 8, 0.95);
+  
+  border: 1px solid rgba(100, 149, 237, 0.3);
+  border-bottom: 2px solid #6495ED; 
+  border-radius: 0px; 
+  
+  margin: 0 5px;
   color: #FFFF66;
   
-  min-height: 30px; 
-  padding: 0 12px;
+  min-height: 34px; 
+  padding: 0 16px; 
 
-  box-shadow: 0 0 4px rgba(100, 149, 237, 0.8);
-}
+  background-image: radial-gradient(rgba(100, 149, 237, 0.10) 1px, transparent 0);
+  background-size: 4px 4px;
 
-.volume-eventbox, .media-eventbox {
-  padding: 0px;
+  box-shadow: 0 0 6px rgba(100, 149, 237, 0.4);
+
+  text-shadow: 
+    -1px -1px 0px rgba(255, 0, 85, 0.5),
+     1px 1px 0px rgba(0, 255, 255, 0.5);
 }
 
 .icon {
-  color: $border;
-  margin-right: 8px;
+  color: #6495ED;
+  margin-right: 10px;
   font-size: 1.2rem;
+  text-shadow: 0 0 3px rgba(100, 149, 237, 0.8);
 }
-
 
 .workspaces {
   padding: 0 4px;
+  background-image: none;
+  min-height: 34px; 
 
-  min-height: 30px;
   button {
     all: unset;
-    
     &:hover .dot {
       background-color: #F7635D;
+      box-shadow: 0 0 6px #F7635D;
     }
   }
 
   .dot {
-    background-color: #6495ED; 
-    min-width: 14px;
-    min-height: 14px;
-    border-radius: 50%;
-    margin: 0 5px;
+    background-color: rgba(100, 149, 237, 0.3); 
+    min-width: 9px;
+    min-height: 20px;
+    border-radius: 1px;
+    margin: 0 4px;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .occupied {
-    background-color: #FFFF66;
+    background-color: #6495ED;
+    box-shadow: 0 0 4px rgba(100, 149, 237, 0.5);
   }
 
   .active {
     background-color: #FFFF66;
-    min-width: 32px;
-    min-height: 14px;
-    border-radius: 7px;
+    min-width: 30px; 
+    min-height: 20px;
+    border-radius: 0px;
+    box-shadow: 0 0 8px rgba(255, 255, 102, 0.7);
   }
 }
 
@@ -84,15 +95,17 @@ $font: "JetBrains Mono Nerd Font";
   box-shadow: 15px 15px 40px rgba(0, 0, 0, 0.5);
 
   background-image: 
+    radial-gradient(rgba(100, 149, 237, 0.2) 1px, transparent 0),
     linear-gradient(to right, #6495ED 0%, #6495ED 100%),
     linear-gradient(to right, #FFFF66 0%, #FFFF66 92%, transparent 92%),
     linear-gradient(to bottom, #6495ED 0%, #6495ED 100%),
-    linear-gradient(-45deg, transparent 20px, rgba(2, 4, 8, 0.95) 20px),
-    radial-gradient(rgba(100, 149, 237, 0.1) 1px, transparent 0);
+    linear-gradient(-45deg, transparent 20px, rgba(2, 4, 8, 0.95) 20px);
   
-  background-repeat: no-repeat;
-  background-size: 100% 2px, 100% 3px, 3px 100%, 100% 100%, 6px 6px;
-  background-position: top center, bottom center, left center, center center, center center;
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  
+  background-size: 5px 5px, 100% 2px, 100% 3px, 3px 100%, 100% 100%;
+  
+  background-position: center center, top center, bottom center, left center, center center;
 
   padding: 22px;
   transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -116,6 +129,12 @@ $font: "JetBrains Mono Nerd Font";
   text-shadow: 
     -2px -1px 0px rgba(255, 0, 85, 0.5),
      2px 1px 0px rgba(0, 255, 255, 0.5);
+  animation: text-glow 2s infinite alternate;
+}
+
+@keyframes text-glow {
+  from { text-shadow: -1px -1px 0px rgba(255, 0, 85, 0.5), 1px 1px 0px rgba(0, 255, 255, 0.5); }
+  to { text-shadow: -2px -1px 2px rgba(255, 0, 85, 0.8), 2px 1px 2px rgba(0, 255, 255, 0.8); }
 }
 
 .hud-btn {
@@ -152,9 +171,10 @@ $font: "JetBrains Mono Nerd Font";
 
 .vol-hud-card {
   transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
-
   border: none;
   background-color: transparent;
+
+  min-width: 100px;
 
   background-image: 
     linear-gradient(to right, transparent 25px, #6495ED 25px, #6495ED 100%),
@@ -166,49 +186,53 @@ $font: "JetBrains Mono Nerd Font";
 
   box-shadow: inset -3px 0 0 #6495ED;
   
-  padding: 25px 12px;
+  padding: 25px 0;
 }
 
 .vol-bar-container {
+  all: unset;
   background-color: rgba(0, 0, 0, 0.6);
   border: 1px solid rgba(100, 149, 237, 0.3);
-  min-width: 18px;
+  min-width: 20px;
   min-height: 250px;
   margin: 15px 0;
   
   background-image: radial-gradient(rgba(100, 149, 237, 0.2) 1px, transparent 0);
   background-size: 5px 5px;
   box-shadow: 15px 0 30px rgba(100, 149, 237, 0.1);
-
-  transition: opacity 300ms ease-in-out;
 }
 
 .vol-bar-fill {
-  background: linear-gradient(to top, 
-    #1e3a8a 0%, 
-    #6495ED 60%, 
-    #FFFF66 100%
-  );
-  min-width: 18px;
+  background: linear-gradient(to top, #1e3a8a 0%, #6495ED 60%, #FFFF66 100%);
+  min-width: 20px;
   box-shadow: 0 0 25px rgba(100, 149, 237, 0.6);
+  margin: 0;
+  padding: 0;
+}
+
+.vol-bar-fill-muted {
+  background: linear-gradient(to top, #4a0000 0%, #F7635D 100%);
+  box-shadow: 0 0 25px rgba(247, 99, 93, 0.5);
+  min-width: 20px; 
 }
 
 .vol-indicator-line {
   min-height: 3px;
   min-width: 30px; 
   background-color: #FFFF66;
-  box-shadow: 
-    0 0 10px #FFFF66,
-    0 0 20px rgba(255, 255, 102, 0.8);
+  box-shadow: 0 0 10px #FFFF66, 0 0 20px rgba(255, 255, 102, 0.8);
+}
+
+.vol-indicator-line.muted {
+  background-color: #F7635D;
+  box-shadow: 0 0 10px #F7635D;
 }
 
 .vol-hud-value {
   font-family: "JetBrains Mono";
   font-size: 22px;
   color: #FFFF66;
-  text-shadow: 
-    -2px -1px 0px rgba(255, 0, 85, 0.5),
-     2px 1px 0px rgba(0, 255, 255, 0.5);
+  text-shadow: -2px -1px 0px rgba(255, 0, 85, 0.5), 2px 1px 0px rgba(0, 255, 255, 0.5);
   margin: 5px 0;
 }
 
@@ -219,3 +243,170 @@ $font: "JetBrains Mono Nerd Font";
   letter-spacing: 1px;
 }
 
+.muted-text {
+  color: #F7635D;
+  text-shadow: 0 0 5px rgba(247, 99, 93, 0.4);
+}
+
+.notif-frame {
+  margin: 0 4px 6px 4px;
+  border: none;
+  background-color: transparent;
+  box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.notif-container {
+  border: none;
+  background-color: transparent;
+
+  background-image: 
+    radial-gradient(rgba(100, 149, 237, 0.12) 0.8px, transparent 0.8px),
+    linear-gradient(to right, #6495ED 0%, #6495ED 100%),
+    linear-gradient(to right, #FFFF66 0%, #FFFF66 85%, transparent 85%),
+    linear-gradient(to bottom, #6495ED 0%, #6495ED 100%),
+    linear-gradient(-45deg, transparent 10px, rgba(1, 2, 3, 0.96) 10px);
+  
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  
+  background-size: 2.5px 2.5px, 100% 1px, 100% 1.5px, 1.5px 100%, 100% 100%;
+  
+  background-position: center center, top center, bottom center, left center, center center;
+
+  padding: 10px 16px;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.notif-header {
+  min-height: 20px;
+  margin-bottom: 6px;
+}
+
+.notif-header-accent {
+  min-width: 2px;
+  background: linear-gradient(to bottom, #6495ED, #52FFF8);
+}
+
+.notif-header-main {
+  background-color: transparent;
+  padding: 2px 6px 2px 4px;
+}
+
+.notif-header-end {
+  min-width: 2px;
+  background: linear-gradient(to bottom, #52FFF8, #6495ED);
+}
+
+.notif-app {
+  font-family: "JetBrains Mono";
+  font-weight: 700;
+  font-size: 12px;
+  color: #52FFF8;
+  letter-spacing: 0.5px;
+  opacity: 0.9;
+  text-shadow: 
+    0 0 3px rgba(82, 255, 248, 0.4),
+    -0.5px 0 rgba(82, 255, 248, 0.3),
+    0.5px 0 rgba(247, 99, 93, 0.2);
+}
+
+.notif-content {
+  padding: 0;
+  margin-bottom: 6px;
+}
+
+.notif-title {
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 0.6px;
+  color: #FFFF66;
+  margin-bottom: 3px;
+
+  text-shadow: 
+    -0.5px -0.5px 0px rgba(255, 0, 85, 0.4),
+     0.5px 0.5px 0px rgba(0, 255, 255, 0.4);
+}
+
+.notif-text {
+  font-size: 14px;
+  color: #FFCB37;
+  opacity: 0.85;
+
+  text-shadow:
+    -0.3px 0 rgba(82, 255, 248, 0.3),
+     0.3px 0 rgba(247, 99, 93, 0.3);
+}
+
+.notif-footer {
+  background-color: transparent;
+  padding: 0;
+  border-top: none;
+  margin-top: 6px;
+}
+
+.notif-time {
+  font-family: "JetBrains Mono";
+  font-weight: 700;
+  font-size: 10px;
+  color: #8888FF;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+  text-shadow: 0 0 2px rgba(136, 136, 255, 0.3);
+}
+
+.notif-close {
+  background: rgba(247, 99, 93, 0.2);
+  color: #FF9999;
+  border: none;
+  border-radius: 1px;
+  padding: 1px 6px;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.6px;
+  text-shadow: 0 0 2px rgba(247, 99, 93, 0.3);
+  transition: all 0.12s;
+  min-height: 16px;
+}
+
+.notif-close:hover {
+  background: rgba(247, 99, 93, 0.35);
+  color: white;
+  box-shadow: 0 0 6px rgba(247, 99, 93, 0.4);
+}
+
+.notif-close:active {
+  background: rgba(247, 99, 93, 0.5);
+  box-shadow: 0 0 8px rgba(247, 99, 93, 0.5);
+}
+
+.notif-status {
+  font-family: "JetBrains Mono";
+  font-weight: 800;
+  font-size: 6px;
+  color: #6495ED;
+  letter-spacing: 1.5px;
+  opacity: 0.5;
+}
+
+.notif-id {
+  font-family: "JetBrains Mono";
+  font-weight: 800;
+  font-size: 6px;
+  color: #6495ED;
+  letter-spacing: 1px;
+  opacity: 0.5;
+  padding: 6px 0 0 0;
+}
+
+.notif-separator {
+  background: linear-gradient(to right, #6495ED, transparent);
+  min-height: 0.5px;
+  margin: 4px 0;
+  opacity: 0.25;
+}
+
+.notif-separator-thick {
+  background: linear-gradient(to right, #6495ED, #52FFF8, transparent);
+  min-height: 1px;
+  margin: 6px 0;
+  opacity: 0.3;
+}
