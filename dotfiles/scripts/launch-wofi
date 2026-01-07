@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 THEME_DIR="$HOME/nixos-dotfiles/dotfiles/wofi"
-FLAVOUR="${2:-macchiato}"
+FLAVOUR="${2:-cyberpunk}"
 STYLE_PATH="$THEME_DIR/src/$FLAVOUR/style.css"
 CONFIG_PATH="$THEME_DIR/config"
 
