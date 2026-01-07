@@ -44,6 +44,17 @@ $green: #3DD553;
      1px 1px 0px rgba(0, 255, 255, 0.5);
 }
 
+.module.media {
+  min-width: 330px;
+  
+  label {
+    padding: 0;
+    margin: 0;
+    font-family: "JetBrains Mono Nerd Font", "JetBrains Mono";
+    animation: text-glow 2s infinite alternate;
+  }
+}
+
 .icon {
   color: #6495ED;
   margin-right: 10px;

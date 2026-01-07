@@ -20,6 +20,7 @@
       enable = true;
       shellAliases = {
 	nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles/#pc";
+    nrf = "cd ~/nixos-dotfiles && nix flake update";
 	vim = "nvim";
         ls = "eza -la --header --git --icons --group-directories-first";
       };

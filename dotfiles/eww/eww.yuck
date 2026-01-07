@@ -12,7 +12,9 @@
   "scripts/network.sh")
 
 (deflisten volume :initial "0" "scripts/volume.sh")
-(deflisten media :initial "" "scripts/mediaplayer.sh")
+(deflisten media :initial '{"status": "Stopped", "text": "LOADING...", "icon": "󰐊"}'
+  "python3 scripts/marquee.py")
+
 (deflisten workspaces_mon1 :initial "[]" "scripts/workspaces.sh HDMI-A-1")
 (deflisten workspaces_mon2 :initial "[]" "scripts/workspaces.sh DP-1")
 
@@ -49,6 +51,7 @@
     )
   ))
 
+
 (defwidget music [monitor_id]
   (eventbox :onscroll "echo {} | sed -e 's/up/next/g' -e 's/down/previous/g' | xargs playerctl"
             :onclick "eww open --toggle media_hud_mon${monitor_id} && eww open --toggle media_hud_closer_mon${monitor_id}"
@@ -56,9 +59,15 @@
     (box :class "module media"
          :orientation "h"
          :space-evenly false
-         :visible {media != ""}
-         (label :class "icon" :text "󰝚 ")
-         (label :text media :limit-width 35))))
+         :width 330
+         :visible {media.text != "NO_DATA_STREAM" && media.text != ""}
+      
+      (label :class "icon" :text {media.status == "Playing" ? "󰝚 " : "󰏤 "})
+      
+      (label :text {media.text} 
+             :halign "start"
+             :width 300
+             :limit-width 40))))
 
 ;; --- MEDIA HUD WINDOWS ---
 
@@ -70,25 +79,28 @@
     
     (box :class "hud-separator")
 
-    (box :orientation "v" :space-evenly false :class "hud-body" :style "margin: 10px 0;"
+    (box :orientation "v" :space-evenly false :class "hud-body" :style "margin: 5px 0;"
       (label :text "NOW_PLAYING" :class "hud-label-tiny" :halign "start")
-      (scroll :hscroll true :vscroll false :height 35
-        (label :text {media != "" ? media : "NO_DATA_STREAM"} 
-               :class "hud-title" 
-               :halign "start"))
-      (label :text "CONNECTION_STABLE" :class "hud-status" :style "font-size: 8px; opacity: 0.4;" :halign "start"))
+      (label :text {media.text} 
+            :class "hud-title" 
+            :halign "start"
+            :width 320
+            :xalign 0))
 
     (box :class "hud-controls" :halign "center" :spacing 20
-      (button :onclick "playerctl previous" :class "hud-btn" "󰒮")
-      (button :onclick "playerctl play-pause" :class "hud-btn-play" "󰐊")
-      (button :onclick "playerctl next" :class "hud-btn" "󰒭"))
+      (button :onclick "playerctl -p ${media.name} previous" :class "hud-btn" "󰒮")
+      
+      (button :onclick "playerctl -p ${media.name} play-pause" :class "hud-btn-play" {media.icon})
+        
+      (button :onclick "playerctl -p ${media.name} next" :class "hud-btn" "󰒭")
+    )
       
     (box :class "hud-separator")
 
     (box :space-evenly false
       (label :text "SECURE_CONNECTION_V2.1" :class "hud-status" :style "font-size: 8px; opacity: 0.5;")
-      (label :text " // " :style "color: #6495ED; opacity: 0.5;")
-      (label :text "0x6495ED" :class "hud-status" :style "font-size: 8px; opacity: 0.5;"))))
+      (box :hexpand true)
+      (label :text "SOURCE_MULTI_LINK" :class "hud-status" :style "font-size: 8px; color: #FFFF66;"))))
 
 (defwindow media_hud_mon1 :monitor 0 :stacking "overlay"
   :geometry (geometry :x "145px" :y "5px" :width "350px" :height "150px" :anchor "top left")
