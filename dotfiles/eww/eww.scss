@@ -274,6 +274,16 @@ $green: #3DD553;
   box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.3);
 }
 
+.notif-root-box {
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+.notif-container {
+    margin-bottom: 10px;
+}
+
 .notif-container {
   border: none;
   background-color: transparent;

@@ -217,13 +217,19 @@
 
 (defwindow notif_stack
   :monitor 1
-  :geometry (geometry :x "20px" 
-                     :y "70px"
-                     :width "350px" 
-                     :height "500px"
-                     :anchor "top right")
   :stacking "overlay"
-  (box :orientation "v" :space-evenly false :spacing 10
+  :geometry (geometry :x "20px" 
+                      :y "70px"
+                      :width "350px" 
+                      :height "0px"
+                      :anchor "top right")
+  :visible {arraylength(notif_list) > 0}
+  :focusable false
+  
+  (box :orientation "v" 
+       :space-evenly false 
+       :spacing 10
+       :class "notif-root-box"
     (for entry in notif_list
       (notif_entry :notif entry))))
 

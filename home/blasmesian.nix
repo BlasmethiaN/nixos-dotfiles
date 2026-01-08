@@ -86,6 +86,7 @@
         pygobject3
       ]))
       gobject-introspection
+      p7zip
       gamemode
       wine
       unrar
