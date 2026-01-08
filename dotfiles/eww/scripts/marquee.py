@@ -11,26 +11,38 @@ def get_player_data():
         if not all_players:
             return "Stopped", "", ""
 
-        active_player = None
+        playing_players = []
         for p in all_players:
-            p_status = subprocess.check_output(["playerctl", "-p", p, "status"], stderr=subprocess.DEVNULL).decode("utf-8").strip()
-            if p_status == "Playing":
-                active_player = p
-                break
-        
-        if not active_player:
+            st = subprocess.check_output(["playerctl", "-p", p, "status"], stderr=subprocess.DEVNULL).decode("utf-8").strip()
+            if st == "Playing":
+                playing_players.append(p)
+
+        active_player = None
+        if playing_players:
+            for p in playing_players:
+                if "spotify" in p.lower():
+                    active_player = p
+                    break
+            if not active_player:
+                active_player = playing_players[0]
+        else:
             active_player = all_players[0]
 
-        status = subprocess.check_output(["playerctl", "-p", active_player, "status"], stderr=subprocess.DEVNULL, timeout=0.5).decode("utf-8").strip()
-        artist = subprocess.check_output(["playerctl", "-p", active_player, "metadata", "artist"], stderr=subprocess.DEVNULL, timeout=0.5).decode("utf-8").strip()
-        title = subprocess.check_output(["playerctl", "-p", active_player, "metadata", "title"], stderr=subprocess.DEVNULL, timeout=0.5).decode("utf-8").strip()
+        status = subprocess.check_output(["playerctl", "-p", active_player, "status"], stderr=subprocess.DEVNULL).decode("utf-8").strip()
         
+        try:
+            artist = subprocess.check_output(["playerctl", "-p", active_player, "metadata", "artist"], stderr=subprocess.DEVNULL).decode("utf-8").strip()
+        except: artist = ""
+        try:
+            title = subprocess.check_output(["playerctl", "-p", active_player, "metadata", "title"], stderr=subprocess.DEVNULL).decode("utf-8").strip()
+        except: title = ""
+
         if artist and title:
             metadata = f"{title} - {artist}"
         elif artist or title:
             metadata = artist if artist else title
         else:
-            metadata = ""
+            metadata = active_player.split('.')[0].capitalize()
             
         return status, metadata, active_player
     except Exception:
@@ -46,17 +58,13 @@ def run():
         if not metadata or status == "Stopped":
             display_text = "NO_DATA_STREAM".ljust(WIDTH, "\u00A0")
             print(json.dumps({
-                "status": "Stopped", 
-                "text": display_text, 
-                "icon": "󰐊", 
-                "name": "",
-                "active": False
+                "status": "Stopped", "text": display_text, "icon": "󰐊", "name": "", "active": False
             }), flush=True)
             offset = 0
             time.sleep(1)
             continue
 
-        if metadata != last_meta or status != "Playing":
+        if metadata != last_meta:
             offset = 0
             last_meta = metadata
 
@@ -70,21 +78,19 @@ def run():
         else:
             display_text = text.ljust(WIDTH, "\u00A0")
 
-        data = {
+        print(json.dumps({
             "status": status,
             "text": display_text,
             "icon": "󰏤" if status == "Playing" else "󰐊",
             "name": player_id,
             "active": True
-        }
-        
-        print(json.dumps(data), flush=True)
+        }), flush=True)
         
         if status == "Playing":
             offset += 1
-            time.sleep(0.3)
-        else:
             time.sleep(0.5)
+        else:
+            time.sleep(0.8)
 
 if __name__ == "__main__":
     run()

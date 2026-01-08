@@ -53,9 +53,9 @@
 
 
 (defwidget music [monitor_id]
-  (eventbox :onscroll "echo {} | sed -e 's/up/next/g' -e 's/down/previous/g' | xargs playerctl"
+  (eventbox :onscroll "echo {} | sed -e 's/up/next/g' -e 's/down/previous/g' | xargs -I {} playerctl -p ${media.name} {}"
             :onclick "eww open --toggle media_hud_mon${monitor_id} && eww open --toggle media_hud_closer_mon${monitor_id}"
-            :onrightclick "playerctl play-pause"
+            :onrightclick "playerctl -p ${media.name} play-pause"
     (box :class "module media"
          :orientation "h"
          :space-evenly false
