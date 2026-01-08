@@ -26,7 +26,7 @@ def get_player_data():
         title = subprocess.check_output(["playerctl", "-p", active_player, "metadata", "title"], stderr=subprocess.DEVNULL, timeout=0.5).decode("utf-8").strip()
         
         if artist and title:
-            metadata = f"{artist} - {title}"
+            metadata = f"{title} - {artist}"
         elif artist or title:
             metadata = artist if artist else title
         else:
@@ -44,7 +44,14 @@ def run():
         status, metadata, player_id = get_player_data()
 
         if not metadata or status == "Stopped":
-            print(json.dumps({"status": "Stopped", "text": "NO_DATA_STREAM", "icon": "󰐊", "name": ""}), flush=True)
+            display_text = "NO_DATA_STREAM".ljust(WIDTH, "\u00A0")
+            print(json.dumps({
+                "status": "Stopped", 
+                "text": display_text, 
+                "icon": "󰐊", 
+                "name": "",
+                "active": False
+            }), flush=True)
             offset = 0
             time.sleep(1)
             continue
@@ -67,7 +74,8 @@ def run():
             "status": status,
             "text": display_text,
             "icon": "󰏤" if status == "Playing" else "󰐊",
-            "name": player_id
+            "name": player_id,
+            "active": True
         }
         
         print(json.dumps(data), flush=True)

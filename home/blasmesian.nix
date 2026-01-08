@@ -86,6 +86,9 @@
         pygobject3
       ]))
       gobject-introspection
+      gamemode
+      wine
+      unrar
       playerctl
       pulseaudio
       pamixer

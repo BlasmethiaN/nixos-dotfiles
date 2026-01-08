@@ -53,6 +53,16 @@ $green: #3DD553;
     font-family: "JetBrains Mono Nerd Font", "JetBrains Mono";
     animation: text-glow 2s infinite alternate;
   }
+  label.dead {
+    color: #F7635D;
+    text-shadow: 0 0 10px rgba(247, 99, 93, 0.6);
+    animation: alert-blink 4s infinite alternate;
+  }
+}
+
+@keyframes alert-blink {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
 }
 
 .icon {

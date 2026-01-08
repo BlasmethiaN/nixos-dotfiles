@@ -60,11 +60,11 @@
          :orientation "h"
          :space-evenly false
          :width 330
-         :visible {media.text != "NO_DATA_STREAM" && media.text != ""}
       
       (label :class "icon" :text {media.status == "Playing" ? "󰝚 " : "󰏤 "})
       
-      (label :text {media.text} 
+      (label :class {media.active ? "" : "dead"}
+             :text {media.text} 
              :halign "start"
              :width 300
              :limit-width 40))))
@@ -144,14 +144,12 @@
         :valign "center"
         :style "padding: 2px 0;"
         
-        ;; Artefakt: STATUS
         (label
           :class "notif-status"
           :text "INCOMING"
           :valign "center"
           :style "margin-left: 10px; margin-right: 10px;")
         
-        ;; App name
         (label
           :class "notif-app"
           :text {notif.app}
