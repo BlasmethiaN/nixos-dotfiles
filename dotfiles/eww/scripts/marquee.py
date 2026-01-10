@@ -13,9 +13,12 @@ def get_player_data():
 
         playing_players = []
         for p in all_players:
-            st = subprocess.check_output(["playerctl", "-p", p, "status"], stderr=subprocess.DEVNULL).decode("utf-8").strip()
-            if st == "Playing":
-                playing_players.append(p)
+            try:
+                st = subprocess.check_output(["playerctl", "-p", p, "status"], stderr=subprocess.DEVNULL).decode("utf-8").strip()
+                if st == "Playing":
+                    playing_players.append(p)
+            except:
+                continue
 
         active_player = None
         if playing_players:
@@ -51,16 +54,19 @@ def get_player_data():
 def run():
     offset = 0
     last_meta = ""
+    last_json = ""
     
     while True:
         status, metadata, player_id = get_player_data()
 
-        if not metadata or status == "Stopped":
-            display_text = "NO_DATA_STREAM".ljust(WIDTH, "\u00A0")
-            print(json.dumps({
-                "status": "Stopped", "text": display_text, "icon": "󰐊", "name": "", "active": False
-            }), flush=True)
+        if status != "Playing":
             offset = 0
+
+        if not metadata or status == "Stopped":
+            res = json.dumps({"status": "Stopped", "text": "NO_DATA_STREAM".ljust(WIDTH, "\u00A0"), "icon": "󰐊", "name": "", "active": False})
+            if res != last_json:
+                print(res, flush=True)
+                last_json = res
             time.sleep(1)
             continue
 
@@ -78,19 +84,24 @@ def run():
         else:
             display_text = text.ljust(WIDTH, "\u00A0")
 
-        print(json.dumps({
+        current_data = {
             "status": status,
             "text": display_text,
             "icon": "󰏤" if status == "Playing" else "󰐊",
             "name": player_id,
             "active": True
-        }), flush=True)
+        }
+        res = json.dumps(current_data)
+
+        if res != last_json or status == "Playing":
+            print(res, flush=True)
+            last_json = res
         
         if status == "Playing":
             offset += 1
             time.sleep(0.5)
         else:
-            time.sleep(0.8)
+            time.sleep(1.0)
 
 if __name__ == "__main__":
     run()
