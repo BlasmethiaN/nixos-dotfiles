@@ -113,97 +113,54 @@
 ;; --- NOTIFICATION (LEAVING ACTIVE) ---
 
 (defwidget notif_entry [notif]
-  (box
-    :class "notif-container"
-    :orientation "v"
-    :space-evenly false
-    (box
-      :class "notif-header"
-      :orientation "h"
-      :space-evenly false
-      :spacing 0
-      :height 20
-      (box :class "notif-header-accent" :height 20)
-      (box
-        :class "notif-header-main"
-        :orientation "h"
-        :hexpand true
-        :space-evenly false
-        :valign "center"
-        :style "padding: 2px 0;"
-        (label
-          :class "notif-status"
-          :text "INCOMING"
-          :valign "center"
-          :style "margin-left: 10px; margin-right: 10px;")
-        (label
-          :class "notif-app"
-          :text {notif.app}
-          :hexpand true
-          :halign "start"
-          :valign "center"))
-      (box :class "notif-header-end" :height 20))
-    (box :class "notif-separator")
-    (box
-      :class "notif-content"
-      :orientation "v"
-      :hexpand true
-      :space-evenly false
-      :spacing 1
-      (label
-        :class "notif-title"
-        :text {notif.summary}
-        :wrap true
-        :hexpand true
-        :halign "start")
-      (revealer
-        :reveal {notif.body != ""}
-        :transition "none"
-        (label
-          :class "notif-text"
-          :text {notif.body}
-          :wrap true
-          :hexpand true
-          :halign "start")))
-    (box :class "notif-separator-thick")
-    (box
-      :class "notif-footer"
-      :orientation "h"
-      :space-evenly false
-      :valign "center"
-      :height 16
-      (label
-        :class "notif-status"
-        :text "ACK_REQUIRED"
-        :valign "center"
-        :style "margin-right: 8px;")
-      (label
-        :class "notif-time"
-        :text {notif.time}
-        :hexpand true
-        :halign "start"
-        :valign "center")
-      (button
-        :class "notif-close"
-        :onclick "dbus-send --session --type=method_call --dest=org.freedesktop.Notifications /org/freedesktop/Notifications org.freedesktop.Notifications.CloseNotification uint32:${notif.id}"
-        "ACK"))))
+  (box :class "notif-container"
+       :orientation "v"
+       :space-evenly false
+    (box :class "notif-card"
+         :orientation "v"
+         :space-evenly false
+      (box :class "notif-header"
+           :space-evenly false
+        (label :class "notif-pill" :text "INCOMING")
+        (label :class "notif-app" :text {notif.app} :hexpand true :halign "start" :limit-width 20))
+      
+      (box :class "notif-body"
+           :orientation "v"
+           :space-evenly false
+        (label :class "notif-title" 
+               :text {notif.summary} 
+               :halign "start" 
+               :wrap true
+               :limit-width 35)
+        (label :class "notif-text" 
+               :text {replace(notif.body, "\\n", " ")} 
+               :halign "start" 
+               :wrap true 
+               :limit-width 80
+               :visible {notif.body != ""}))
+      
+      (box :class "notif-footer"
+           :space-evenly false
+        (label :class "notif-pill" :text "ACK_REQUIRED")
+        (label :class "notif-time" :text {notif.time} :hexpand true :halign "start")
+        (button :class "notif-close"
+                :onclick "dbus-send --session --type=method_call --dest=org.freedesktop.Notifications /org/freedesktop/Notifications org.freedesktop.Notifications.CloseNotification uint32:${notif.id}"
+                "ACK")))))
 
 (defwindow notif_stack
   :monitor 1
   :stacking "overlay"
-  :geometry (geometry :x "20px" 
-                      :y "70px"
-                      :width "350px" 
-                      :height "0px"
-                      :anchor "top right")
-  :visible {arraylength(notif_list) > 0}
+  :exclusive false
   :focusable false
-  (box :orientation "v" 
-        :space-evenly false 
-        :spacing 10
-        :class "notif-root-box"
+  :namespace "eww-notifs"
+  :geometry (geometry :x "20px" :y "70px" :width "350px" :anchor "top right")
+  (box :orientation "v"
+       :space-evenly false
+       :class "notif-root"
     (for entry in notif_list
-      (notif_entry :notif entry))))
+      (notif_entry :notif entry))
+  )
+)
 
 ;; --- VOLUME HUD DISABLED ---
 

@@ -42,6 +42,14 @@
 
     programs.kitty.enable = true;
 
+    programs.mpv = {
+      enable = true;
+      config = {
+        loop-file = "inf";
+        hwdec = "auto-safe";
+      };
+    };
+
     programs.ranger = {
       enable = true;
       extraConfig = ''
@@ -85,10 +93,19 @@
         dbus-python
         pygobject3
       ]))
+      obsidian
+      pulsemixer
+      ncdu
+      heroic
+      vscode
+      gnumake
+      gale
       gobject-introspection
       p7zip
       gamemode
+      gamescope
       wine
+      winetricks
       unrar
       playerctl
       pulseaudio

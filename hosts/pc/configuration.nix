@@ -119,6 +119,11 @@
     };
   };
 
+fileSystems."/B" = {
+  device = "/dev/disk/by-uuid/8137a400-fb83-4f94-8834-70473974bb49";
+  fsType = "ext4";
+};
+
 #  # List packages installed in system profile.
 #  # You can use https://search.nixos.org/ to find more packages (and options).
 #  environment.systemPackages = with pkgs; [
