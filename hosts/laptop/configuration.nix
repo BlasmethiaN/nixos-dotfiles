@@ -112,7 +112,7 @@
   environment.sessionVariables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
-    Path = "/home/blasmesian/.local/bin:" + builtins.getEnv "PATH";
+    #Path = "/home/blasmesian/.local/bin:" + builtins.getEnv "PATH";
     XDG_STATE_HOME = "/home/blasmesian/.local/state";
     XDG_DATA_HOME = "/home/blasmesian/.local/share";
   };

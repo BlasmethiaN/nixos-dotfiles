@@ -1,193 +1,57 @@
-  { config, pkgs, inputs, ... }:
+{ pkgs, ... }: {
 
-  {
-    home.username = "blasmesian";
-    home.homeDirectory = "/home/blasmesian";
-    home.stateVersion = "24.11";
+  nixpkgs.config.allowUnfree = true;
 
-    home.sessionVariables = {
+  imports = [
+    ../modules/home/shell.nix
+    ../modules/home/desktop.nix
+  ];
+
+  home = {
+    username = "blasmesian";
+    homeDirectory = "/home/blasmesian";
+    stateVersion = "24.11";
+
+    sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "nvim";
-      Path = "/home/blasmesian/.local/bin:" + builtins.getEnv "PATH";
-      XDG_STATE_HOME = "/home/blasmesian/.local/state";
-      XDG_DATA_HOME = "/home/blasmesian/.local/share";
-      XCURSOR_THEME = "Bibata-Original-Classic";
-      XCURSOR_SIZE = "24";
+      XDG_STATE_HOME = "$HOME/.local/state";
+      XDG_DATA_HOME = "$HOME/.local/share";
     };
 
+    sessionPath = [ "$HOME/.local/bin" ];
 
-    programs.bash = {
-      enable = true;
-      shellAliases = {
-	nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles/#pc";
-    nrf = "cd ~/nixos-dotfiles && nix flake update";
-	vim = "nvim";
-        ls = "eza -la --header --git --icons --group-directories-first";
-      };
-      initExtra = ''
-  export PATH=$HOME/.local/bin:$PATH
-  export EDITOR="nvim"
-  export VISUAL="nvim"
-  if command -v fastfetch &>/dev/null; then
-      fastfetch --config ~/.config/fastfetch/main.jsonc
-  fi
-
-  rm -f $HOME/.local/share/recently-used.xbel
-'';
-    };
-
-    programs.starship = {
-      enable = true;
-    };
-
-    programs.kitty.enable = true;
-
-    programs.mpv = {
-      enable = true;
-      config = {
-        loop-file = "inf";
-        hwdec = "auto-safe";
-      };
-    };
-
-    programs.ranger = {
-      enable = true;
-      extraConfig = ''
-        set editor nvim
-	set preview_images true
-	set preview_images_method ueberzug
-
-	map <C-d> shell dragon-drag-and-drop -a -x %p --and-exit
-      '';
-    };
-
-    home.file = with pkgs; {
-      ".config/alacritty/alacritty.toml".source = ../dotfiles/alacritty/alacritty.toml;
-      ".config/kitty".source = ../dotfiles/kitty;
-      ".config/hypr".source = ../dotfiles/hypr;
-      ".config/starship.toml".source = ../dotfiles/starship.toml;
-      ".config/eww".source = ../dotfiles/eww;
-      ".config/fastfetch".source = ../dotfiles/fastfetch;
-      ".local/bin/keyboard_layout.sh" = {
-	source = ../dotfiles/scripts/keyboard_layout.sh;
-        executable = true;
-      };
-      ".local/bin/launch-wofi" = {
-	source = ../dotfiles/scripts/launch-wofi;
-        executable = true;
-      };
-      ".local/bin/launch-wofi-emoji" = {
-	source = ../dotfiles/scripts/launch-wofi-emoji;
-        executable = true;
-      };
-      ".local/bin/screenshot" = {
-	source = ../dotfiles/scripts/screenshot.sh;
-        executable = true;
-      };
-    };
-
-    fonts.fontconfig.enable = true;
-
-    home.packages = with pkgs; [
-      (python3.withPackages (ps: with ps; [
-        dbus-python
-        pygobject3
-      ]))
-      obsidian
-      pulsemixer
-      ncdu
-      heroic
-      vscode
-      gnumake
-      gale
+    packages = with pkgs; [
+      # Python & Dev
+      (python3.withPackages (ps: with ps; [ dbus-python pygobject3 ]))
+      gnumake gcc nodejs ninja pkg-config stylua lua-language-server
       gobject-introspection
-      p7zip
-      gamemode
-      gamescope
-      wine
-      winetricks
-      unrar
-      playerctl
-      pulseaudio
-      pamixer
-      jq
-      socat
-      eww
-      gimp
-      mpv
-      zathura
-      lutris
-      libreoffice
-      wev
-      grim
-      slurp
-      wl-clipboard
-      libnotify
-      gzip
-      eza
-      nerd-fonts.caskaydia-mono
-      nerd-fonts.iosevka
-      nerd-fonts.blex-mono
-      fira-code
-      fira-code-symbols
-      font-awesome
-      liberation_ttf
-      proggyfonts
-      noto-fonts-color-emoji
-      noto-fonts-cjk-sans
-      xsettingsd
-      discord
-      spotify
-      steam
-      vulkan-loader
-      wlr-randr
-      waybar
-      hyprpanel
-      swww
-      bat
-      rofi
-      gcc
-      ffmpeg
-      firefox
-      brave
-      vim
-      neovim
-      git
-      htop
-      btop
-      alacritty
-      kitty
-      wget
-      unzip
-      atool
-      ranger
-      feh
-      xclip
-      picom
-      wofi
-      starship
-      stylua
-      dragon-drop
-      nodejs
-      ueberzugpp
-      gnutar
-      gzip
-      yazi
-      blueman
-      bluez
-      dbus
-      killall
-      ninja
-      pkg-config
-      curl
-      lua-language-server
-      jetbrains-mono
-      jq
-      bibata-cursors
-      neofetch
-      upower
-      fastfetch
-      gedit
-    ];
 
-  }
+      # Apps
+      obsidian vscode gimp zathura libreoffice gedit
+      discord spotify brave 
+
+      # Gaming
+      heroic lutris wine winetricks gamemode gamescope vulkan-loader
+
+      # Media & System Tools
+      pulsemixer ncdu p7zip unrar playerctl pamixer jq socat
+      grim slurp wl-clipboard libnotify eza bat htop btop
+      ffmpeg killall curl wget unzip atool feh xclip
+      upower fastfetch neofetch wev
+
+      # Desktop UI
+      eww waybar hyprpanel swww rofi wofi wlr-randr
+      dragon-drop ueberzugpp yazi xsettingsd
+      blueman bluez picom # picom jsi tam měl, i když máš Hyprland
+
+      # Fonts & Icons (kompletní seznam z tvého originálu)
+      font-awesome liberation_ttf noto-fonts-color-emoji
+      noto-fonts-cjk-sans fira-code fira-code-symbols
+      proggyfonts jetbrains-mono
+    ];
+  };
+
+  fonts.fontconfig.enable = true;
+  programs.home-manager.enable = true;
+}
