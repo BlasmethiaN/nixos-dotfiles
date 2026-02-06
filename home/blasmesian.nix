@@ -38,12 +38,12 @@
       pulsemixer ncdu p7zip unrar playerctl pamixer jq socat
       grim slurp wl-clipboard libnotify eza bat htop btop
       ffmpeg killall curl wget unzip atool feh xclip
-      upower fastfetch neofetch wev
+      upower fastfetch neofetch wev pulseaudio
 
       # Desktop UI
       eww waybar hyprpanel swww rofi wofi wlr-randr
       dragon-drop ueberzugpp yazi xsettingsd
-      blueman bluez picom # picom jsi tam měl, i když máš Hyprland
+      blueman bluez picom
 
       # Fonts & Icons (kompletní seznam z tvého originálu)
       font-awesome liberation_ttf noto-fonts-color-emoji
