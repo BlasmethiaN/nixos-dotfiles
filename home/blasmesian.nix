@@ -38,7 +38,7 @@
       pulsemixer ncdu p7zip unrar playerctl pamixer jq socat
       grim slurp wl-clipboard libnotify eza bat htop btop
       ffmpeg killall curl wget unzip atool feh xclip
-      upower fastfetch neofetch wev pulseaudio
+      upower fastfetch neofetch wev pulseaudio brightnessctl
 
       # Desktop UI
       eww waybar hyprpanel swww rofi wofi wlr-randr
