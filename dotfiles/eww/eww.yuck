@@ -11,6 +11,9 @@
 (defpoll network :interval "10s"
   "scripts/network.sh")
 
+(defpoll battery :interval "10s"
+  "scripts/battery.sh")
+
 (deflisten volume :initial "0" "scripts/volume.sh")
 (deflisten media :initial '{"status": "Stopped", "text": "LOADING...", "icon": "󰐊"}'
   "python3 scripts/marquee.py")
@@ -19,6 +22,24 @@
 (deflisten workspaces_mon2 :initial "[]" "scripts/workspaces.sh HDMI-A-1")
 
 ;; --- WIDGETY ---
+
+(defwidget battery_widget []
+  (box :class "module battery"
+       :space-evenly false
+       :valign "center"
+       
+    (label :class "icon"
+           :text {battery.status == "Charging" ? "󰂄 " :
+                  battery.status == "Full" ? "󰁹 " :
+                  battery.percent > 80 ? "󰁾 " :
+                  battery.percent > 60 ? "󰁽 " :
+                  battery.percent > 40 ? "󰁼 " :
+                  battery.percent > 20 ? "󰁻 " :
+                  "󰁺 "})
+
+    (label :text "${battery.percent}%"
+           :class {battery.percent < 20 ? "muted-text" : ""})
+  ))
 
 (defwidget network_widget []
   (eventbox :onclick "nm-connection-editor &"
@@ -198,6 +219,7 @@
 
 (defwidget right_modules []
   (box :orientation "h" :space-evenly false :halign "end" :spacing 10
+       (battery_widget)
        (volume_widget)
        (network_widget)
        (box :class "module clock" :space-evenly false
