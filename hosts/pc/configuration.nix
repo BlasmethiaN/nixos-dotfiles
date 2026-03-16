@@ -12,10 +12,15 @@
 
   networking.hostName = "pc";
 
-  fileSystems."/B" = { # Tenhle disk má jen PC
+  fileSystems."/B" = {
     device = "/dev/disk/by-uuid/8137a400-fb83-4f94-8834-70473974bb49";
     fsType = "ext4";
   };
+
+  security.pam.loginLimits = [
+    { domain = "*"; type = "soft"; item = "nofile"; value = "65535"; }
+    { domain = "*"; type = "hard"; item = "nofile"; value = "65535"; }
+  ];
 
   programs.steam.enable = true;
   system.stateVersion = "25.05";

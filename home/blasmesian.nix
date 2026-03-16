@@ -32,7 +32,7 @@
       discord spotify brave 
 
       # Gaming
-      heroic lutris wine winetricks gamemode gamescope vulkan-loader
+      heroic lutris wine winetricks gamemode gamescope vulkan-loader rimsort steamcmd deadlock-mod-manager
 
       # Media & System Tools
       pulsemixer ncdu p7zip unrar playerctl pamixer jq socat
