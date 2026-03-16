@@ -16,7 +16,7 @@
   "python3 scripts/marquee.py")
 
 (deflisten workspaces_mon1 :initial "[]" "scripts/workspaces.sh HDMI-A-1")
-(deflisten workspaces_mon2 :initial "[]" "scripts/workspaces.sh DP-1")
+(deflisten workspaces_mon2 :initial "[]" "scripts/workspaces.sh eDP-1")
 
 ;; --- WIDGETY ---
 
@@ -148,7 +148,7 @@
                 "ACK")))))
 
 (defwindow notif_stack
-  :monitor 1
+  :monitor 0
   :stacking "overlay"
   :exclusive false
   :focusable false
