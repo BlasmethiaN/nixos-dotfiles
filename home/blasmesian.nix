@@ -45,7 +45,7 @@
       dragon-drop ueberzugpp yazi xsettingsd
       blueman bluez picom
 
-      # Fonts & Icons (kompletní seznam z tvého originálu)
+      # Fonts & Icons
       font-awesome liberation_ttf noto-fonts-color-emoji
       noto-fonts-cjk-sans fira-code fira-code-symbols
       proggyfonts jetbrains-mono
