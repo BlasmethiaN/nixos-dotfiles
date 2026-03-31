@@ -35,17 +35,17 @@
       heroic lutris wine winetricks gamemode gamescope vulkan-loader rimsort steamcmd deadlock-mod-manager
 
       # Media & System Tools
-      pulsemixer ncdu p7zip unrar playerctl pamixer jq socat
+      pulsemixer ncdu p7zip unrar playerctl pamixer jq socat mpvpaper
       grim slurp wl-clipboard libnotify eza bat htop btop
       ffmpeg killall curl wget unzip atool feh xclip
-      upower fastfetch neofetch wev pulseaudio
+      upower fastfetch neofetch wev pulseaudio exfatprogs
 
       # Desktop UI
       eww waybar hyprpanel swww rofi wofi wlr-randr
       dragon-drop ueberzugpp yazi xsettingsd
       blueman bluez picom
 
-      # Fonts & Icons (kompletní seznam z tvého originálu)
+      # Fonts & Icons
       font-awesome liberation_ttf noto-fonts-color-emoji
       noto-fonts-cjk-sans fira-code fira-code-symbols
       proggyfonts jetbrains-mono
