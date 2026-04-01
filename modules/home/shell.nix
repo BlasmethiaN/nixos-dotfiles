@@ -7,6 +7,7 @@
       vim = "nvim";
       ls = "eza -la --header --git --icons --group-directories-first";
       rundl = "WEBKIT_DISABLE_COMPOSITING_MODE=1 GDK_BACKEND=x11 deadlock-mod-manager";
+      rscp="rsync -avh --progress";
     };
     initExtra = ''
       export PATH=$HOME/.local/bin:$PATH

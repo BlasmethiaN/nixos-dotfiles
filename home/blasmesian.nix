@@ -5,6 +5,7 @@
   imports = [
     ../modules/home/shell.nix
     ../modules/home/desktop.nix
+    ../modules/home/dev/lsp.nix
   ];
 
   home = {
@@ -24,7 +25,7 @@
     packages = with pkgs; [
       # Python & Dev
       (python3.withPackages (ps: with ps; [ dbus-python pygobject3 ]))
-      gnumake gcc nodejs ninja pkg-config stylua lua-language-server
+      gnumake gcc nodejs ninja pkg-config
       gobject-introspection
 
       # Apps
@@ -35,7 +36,7 @@
       heroic lutris wine winetricks gamemode gamescope vulkan-loader rimsort steamcmd deadlock-mod-manager
 
       # Media & System Tools
-      pulsemixer ncdu p7zip unrar playerctl pamixer jq socat
+      pulsemixer ncdu p7zip unrar playerctl pamixer jq socat mpvpaper
       grim slurp wl-clipboard libnotify eza bat htop btop
       ffmpeg killall curl wget unzip atool feh xclip
       upower fastfetch neofetch wev pulseaudio brightnessctl
