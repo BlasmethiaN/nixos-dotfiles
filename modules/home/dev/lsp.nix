@@ -17,5 +17,12 @@
     marksman # marksman
     nil
     nixpkgs-fmt
+
+    clang-tools
+
+    nodePackages.yaml-language-server
+    taplo
+
+    haskell-language-server
   ];
 }
