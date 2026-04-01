@@ -5,6 +5,7 @@
   imports = [
     ../modules/home/shell.nix
     ../modules/home/desktop.nix
+    ../modules/home/dev/lsp.nix
   ];
 
   home = {
@@ -24,7 +25,7 @@
     packages = with pkgs; [
       # Python & Dev
       (python3.withPackages (ps: with ps; [ dbus-python pygobject3 ]))
-      gnumake gcc nodejs ninja pkg-config stylua lua-language-server
+      gnumake gcc nodejs ninja pkg-config
       gobject-introspection
 
       # Apps
