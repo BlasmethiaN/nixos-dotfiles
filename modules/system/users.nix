@@ -3,7 +3,7 @@
 {
   users.users.blasmesian = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "video" ];
+    extraGroups = [ "wheel" "networkmanager" "video" "kvm" "libvirtd" ];
   };
 
   home-manager = {

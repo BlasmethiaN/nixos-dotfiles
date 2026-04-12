@@ -8,6 +8,7 @@
       ls = "eza -la --header --git --icons --group-directories-first";
       rundl = "WEBKIT_DISABLE_COMPOSITING_MODE=1 GDK_BACKEND=x11 deadlock-mod-manager";
       rscp="rsync -avh --progress";
+      run-junie="NIXPKGS_ALLOW_UNFREE=1 nix-shell -p steam-run --run 'steam-run ~/.local/bin/junie'";
     };
     initExtra = ''
       export PATH=$HOME/.local/bin:$PATH

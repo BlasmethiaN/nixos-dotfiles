@@ -22,6 +22,11 @@
     LC_TIME = "cs_CZ.UTF-8";
   };
 
+  virtualisation.libvirtd.enable = true;
+  programs.dconf.enable = true;
+
+  boot.kernelModules = [ "kvm-intel" ];
+
   # Network
   networking.networkmanager.enable = true;
   security.polkit.enable = true;

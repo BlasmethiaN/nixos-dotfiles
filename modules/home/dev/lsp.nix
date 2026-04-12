@@ -4,12 +4,13 @@
   home.packages = with pkgs; [
     lua-language-server
     stylua
+    kdePackages.qtdeclarative
 
-    nodePackages.bash-language-server # bashls
-    nodePackages.vscode-langservers-extracted # html, cssls, jsonls
-    nodePackages.typescript-language-server # ts_ls
-    nodePackages.vim-language-server # vimls
-    nodePackages.yaml-language-server # yamlls
+    bash-language-server
+    vscode-langservers-extracted
+    typescript-language-server
+    vim-language-server
+    yaml-language-server
 
     pyright # pyright
     rust-analyzer # rust_analyzer
@@ -17,10 +18,10 @@
     marksman # marksman
     nil
     nixpkgs-fmt
+    dart
 
     clang-tools
 
-    nodePackages.yaml-language-server
     taplo
 
     haskell-language-server
