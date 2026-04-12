@@ -11,6 +11,8 @@
 
   programs.firefox.enable = true;
 
+  qt.enable = true;
+
   fonts.packages = with pkgs; [
     nerd-fonts.caskaydia-mono
     nerd-fonts.iosevka

@@ -26,7 +26,7 @@
       # Python & Dev
       (python3.withPackages (ps: with ps; [ dbus-python pygobject3 ]))
       gnumake gcc nodejs ninja pkg-config
-      gobject-introspection
+      gobject-introspection android-studio android-tools
 
       # Apps
       obsidian vscode gimp zathura libreoffice gedit
@@ -39,12 +39,12 @@
       pulsemixer ncdu p7zip unrar playerctl pamixer jq socat mpvpaper
       grim slurp wl-clipboard libnotify eza bat htop btop
       ffmpeg killall curl wget unzip atool feh xclip
-      upower fastfetch neofetch wev pulseaudio exfatprogs
+      upower fastfetch wev pulseaudio exfatprogs
 
       # Desktop UI
       eww waybar hyprpanel swww rofi wofi wlr-randr
       dragon-drop ueberzugpp yazi xsettingsd
-      blueman bluez picom
+      blueman bluez picom quickshell
 
       # Fonts & Icons
       font-awesome liberation_ttf noto-fonts-color-emoji
@@ -53,7 +53,11 @@
     ];
   };
 
+  nixpkgs.config.android_sdk.accept_license = true;
+
   fonts.fontconfig.enable = true;
+  programs.quickshell.enable = true;
+  qt.enable = true;
   programs.home-manager.enable = true;
   programs.neovim = {
     enable = true;
