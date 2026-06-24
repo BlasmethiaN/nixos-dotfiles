@@ -2,10 +2,13 @@
 
 {
   services.xserver.enable = true;
-  services.displayManager.gdm.enable = true;
+  services.displayManager.gdm.enable = false;
+  services.xserver.displayManager.gdm.enable = false;
+  services.displayManager.sddm.enable = true;
 
   programs.hyprland = {
     enable = true;
+    withUWSM = true;
     xwayland.enable = true;
   };
 

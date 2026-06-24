@@ -26,14 +26,14 @@
       # Python & Dev
       (python3.withPackages (ps: with ps; [ dbus-python pygobject3 ]))
       gnumake gcc nodejs ninja pkg-config
-      gobject-introspection android-studio android-tools
+      gobject-introspection
 
       # Apps
       obsidian vscode gimp zathura libreoffice gedit
-      discord spotify brave 
+      discord spotify brave kitty
 
       # Gaming
-      heroic lutris wine winetricks gamemode gamescope vulkan-loader rimsort steamcmd deadlock-mod-manager
+      heroic lutris wine winetricks gamemode gamescope vulkan-loader steamcmd
 
       # Media & System Tools
       pulsemixer ncdu p7zip unrar playerctl pamixer jq socat mpvpaper
@@ -42,9 +42,9 @@
       upower fastfetch wev pulseaudio exfatprogs
 
       # Desktop UI
-      eww waybar hyprpanel swww rofi wofi wlr-randr
+      eww swww rofi wofi wlr-randr
       dragon-drop ueberzugpp yazi xsettingsd
-      blueman bluez picom quickshell
+      blueman bluez picom
 
       # Fonts & Icons
       font-awesome liberation_ttf noto-fonts-color-emoji
@@ -52,8 +52,6 @@
       proggyfonts jetbrains-mono
     ];
   };
-
-  nixpkgs.config.android_sdk.accept_license = true;
 
   fonts.fontconfig.enable = true;
   programs.quickshell.enable = true;

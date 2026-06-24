@@ -15,7 +15,6 @@
     ".local/bin/screenshot" = { source = ../../dotfiles/scripts/screenshot.sh; executable = true; };
   };
 
-  programs.kitty.enable = true;
   programs.mpv = {
     enable = true;
     config = {
